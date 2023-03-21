@@ -52,6 +52,8 @@ public class Agenda {
             c = new Contato(nome, telefone, email, date);
             agenda.add(c);
             System.out.println("Contato " + c.getNome() + " foi adicionado");
+            System.out.println("-------------------");
+            System.out.println("'Limpando o buffer, aperte Enter'");
             sc.nextLine();
     } catch (Exception error) {
             System.out.println(error.getMessage());
@@ -65,11 +67,40 @@ public class Agenda {
         }
     }
 
-    public void excluirContato(String removerNome) {
+    public void excluirContato() {
+        System.out.println("Informe o nome do contato que você deseja excluir");
+        String removerNome = sc.nextLine();
+        boolean checkNome = agenda.contains(removerNome);
         for (int i = 0; i < agenda.size(); i++) {
-            if (agenda.get(i).getNome() == removerNome) {
-                agenda.remove(removerNome);
-                System.out.println("Contato excluido com sucesso");
+            try {
+                if(checkNome) {
+                    System.out.println("Contato excluido com sucesso");
+                } else {
+                    throw new Exception("O nome não está na lista");
+                }
+            } catch(Exception error) {
+                System.out.println(error.getMessage());
+
+            }
+        }
+    }
+
+    public void PesquisarContato() {
+        System.out.println("Informe o nome do contato que você deseja pesquisar");
+        String pesquisarNome = sc.nextLine();
+        boolean checkNome = agenda.contains(pesquisarNome);
+
+        for (int i = 0; i < agenda.size(); i++) {
+            try {
+                if(checkNome) {
+                    System.out.println("Você pesquisou o contato: " + agenda.get(i).getNome());
+                } else {
+                    throw new Exception("O nome não está na lista");
+                }
+
+
+            } catch(Exception error) {
+                System.out.println(error.getMessage());
             }
         }
     }

@@ -1,6 +1,6 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
+
+//LEMBRAR TABELA HASH
 
 public class Main {
     public static void main(String[] args) {
@@ -9,13 +9,14 @@ public class Main {
 
             //TRATAMENTO DE EMAIL, NUMERO CONTATO E NASCIMENTO
 
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < 2; i++) {
                 a.addContato();
             }
 
 
         a.mostrar();
-       a.excluirContato("Tulio");
-//         a.mostrar();
+        //a.excluirContato();
+        //a.mostrar();
+        a.PesquisarContato();
     }
 }
