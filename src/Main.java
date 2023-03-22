@@ -9,14 +9,13 @@ public class Main {
 
             //TRATAMENTO DE EMAIL, NUMERO CONTATO E NASCIMENTO
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 a.addContato();
             }
 
-
-        a.mostrar();
-        //a.excluirContato();
-        //a.mostrar();
+        a.mostrarContatos();
+        a.excluirContato();
+        a.mostrarContatos();
         a.PesquisarContato();
     }
 }

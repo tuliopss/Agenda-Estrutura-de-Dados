@@ -10,9 +10,17 @@ public class Agenda {
     private ArrayList<Contato> agenda = new ArrayList<Contato>();
 
     public boolean checkNumeros(String telefone) {
-    boolean isNumeric = (telefone != null && telefone.matches("[0-9]+"));
+        boolean isNumeric = (telefone != null && telefone.matches("[0-9]+"));
         return isNumeric;
     }
+
+    public boolean checkEmail(String email) {
+        boolean isEmail = (email != null && email.matches("@+"));
+        return isEmail;
+    }
+
+
+
     public void addContato() {
         try {
             System.out.println("Digite o nome do contato que você quer adicionar:");
@@ -29,6 +37,8 @@ public class Agenda {
                 throw new Exception("Campo 'telefone' vazio");
             } else if (!checkNumeros(telefone)) {
                 throw new Exception("Caracteres de telefone inválidos");
+            } else if(telefone.length() < 9) {
+                throw new Exception("Informe o número completo");
             }
 
             System.out.println("Informe o email do contato que vc quer adicionar");
@@ -36,17 +46,17 @@ public class Agenda {
 
             if(email.equals("")) {
                 throw new Exception("Campo 'email' vazio");
+            } else if(checkEmail(email)) {
+                throw new Exception("Email inválido");
             }
-
 
             System.out.println("Informe a data de nascimento");
 
             String dateString = sc.nextLine();
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
             LocalDate date = LocalDate.parse(dateString, formato);
-            //System.out.println(date.format(formato));
 
+            //System.out.println(date.format(formato));
             //LocalDate date = LocalDate.of(year, month, day);
 
             c = new Contato(nome, telefone, email, date);
@@ -60,7 +70,7 @@ public class Agenda {
 
         }
     }
-    public void mostrar() {
+    public void mostrarContatos() {
         for (int i = 0; i < agenda.size(); i++) {
             System.out.println(agenda.get(i).getNome() + " - " + agenda.get(i).getTelefone() + " - " + agenda.get(i).getData()+" - " + agenda.get(i).getEmail());
 
@@ -70,39 +80,51 @@ public class Agenda {
     public void excluirContato() {
         System.out.println("Informe o nome do contato que você deseja excluir");
         String removerNome = sc.nextLine();
-        boolean checkNome = agenda.contains(removerNome);
-        for (int i = 0; i < agenda.size(); i++) {
-            try {
-                if(checkNome) {
-                    System.out.println("Contato excluido com sucesso");
-                } else {
-                    throw new Exception("O nome não está na lista");
-                }
-            } catch(Exception error) {
-                System.out.println(error.getMessage());
+        boolean nameChecked = false;
 
+        for (int i = 0; i < agenda.size(); i++) {
+                if(agenda.get(i).getNome().equals(removerNome)) {
+                    agenda.remove(agenda.get(i));
+                    System.out.println("Contato excluido com sucesso");
+                    System.out.println("");
+                    nameChecked = true;
+                    break;
+                }
+            }
+
+        if(!nameChecked){
+            try {
+                throw new Exception("O nome não está na lista");
+            }catch(Exception error) {
+                System.out.println(error.getMessage());
             }
         }
     }
 
+
+
+
     public void PesquisarContato() {
         System.out.println("Informe o nome do contato que você deseja pesquisar");
         String pesquisarNome = sc.nextLine();
-        boolean checkNome = agenda.contains(pesquisarNome);
+        boolean nameChecked = false;
 
         for (int i = 0; i < agenda.size(); i++) {
-            try {
-                if(checkNome) {
+                if(agenda.get(i).getNome().equals(pesquisarNome)) {
                     System.out.println("Você pesquisou o contato: " + agenda.get(i).getNome());
-                } else {
-                    throw new Exception("O nome não está na lista");
+                    System.out.println("");
+                    nameChecked = true;
+                    break;
                 }
-
-
-            } catch(Exception error) {
+            }
+        if(!nameChecked){
+            try {
+                throw new Exception("O nome não está na lista");
+            }catch(Exception error) {
                 System.out.println(error.getMessage());
             }
         }
+
     }
 
 }
