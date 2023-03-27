@@ -1,17 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Contato {
-
-//    LocalDate data = LocalDate.now();
-DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate data;
-
-
     private String nome, telefone, email;
 
     public String getNome() {
@@ -37,8 +29,8 @@ DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public void setEmail(String email) {
         this.email = email;
     }
-    public LocalDate getData() {
-        return data;
+    public String getData() {
+        return data.format(formato);
     }
 
     public void setData(LocalDate data) {
